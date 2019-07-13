@@ -1,0 +1,27 @@
+/*=========================
+	All css
+==========================*/
+@import url("../vendors/bootstrap/css/bootstrap.min.css");
+@import url("../vendors/fontawesome/css/font-awesome.min.css");
+@import url("../vendors/flaticon/flaticon.css");
+@import url("../vendors/line-awesome/css/line-awesome.min.css");
+@import url("../vendors/themify/themify-icons.css");
+@import url("../vendors/owl-carousel/owl.carousel.css");
+@import url("../vendors/bootstrap-select/bootstrap-select.min.css");
+@import url("../vendors/magnific-popup/magnific-popup.css");
+@import url("../vendors/scroll/scrollbar.css");
+@import url("../vendors/switcher/switcher.css");
+
+/*=========================
+	All css
+==========================*/
+@import url('https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i|Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Rubik:300,300i,400,400i,500,500i,700,700i,900,900i');
+
+/*
+    font-family: 'Poppins', sans-serif;
+    font-family: 'Open Sans', sans-serif;
+    font-family: 'Raleway', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    font-family: 'Rubik', sans-serif;
+    font-family: 'Montserrat', sans-serif;
+*/

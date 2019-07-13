@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services">
+
+    <config xmlns="http://example.org/schema/dic/httplug">
+        <default-client-autowiring>false</default-client-autowiring>
+        <main-alias>
+            <client>my_client</client>
+            <message-factory>my_message_factory</message-factory>
+            <uri-factory>my_uri_factory</uri-factory>
+            <stream-factory>my_stream_factory</stream-factory>
+        </main-alias>
+        <classes>
+            <client>Http\Adapter\Guzzle6\Client</client>
+            <message-factory>Http\Message\MessageFactory\GuzzleMessageFactory</message-factory>
+            <uri-factory>Http\Message\UriFactory\GuzzleUriFactory</uri-factory>
+            <stream-factory>Http\Message\StreamFactory\GuzzleStreamFactory</stream-factory>
+        </classes>
+        <client name="test" factory="httplug.factory.guzzle6" http-methods-client="true">
+            <plugin>httplug.plugin.redirect</plugin>
+            <plugin>
+                <add-host host="http://localhost"/>
+            </plugin>
+            <plugin>
+                <add-path path="/api/v1"/>
+            </plugin>
+            <plugin>
+                <base-uri uri="http://localhost"/>
+            </plugin>
+            <plugin>
+                <content-type skip-detection="true"/>
+            </plugin>
+            <plugin>
+                <header-set>
+                    <header name="X-FOO">bar</header>
+                </header-set>
+            </plugin>
+            <plugin>
+                <header-remove>
+                    <header>X-FOO</header>
+                </header-remove>
+            </plugin>
+            <plugin>
+                <authentication>
+                    <my_basic type="basic" username="foo" password="bar"/>
+                </authentication>
+            </plugin>
+        </client>
+        <profiling enabled="true" formatter="my_toolbar_formatter" captured_body_length="0"/>
+        <plugins>
+            <authentication>
+                <my_basic type="basic" username="foo" password="bar"/>
+                <my_wsse type="wsse" username="foo" password="bar"/>
+                <my_bearer type="bearer" token="foo"/>
+                <my_service type="service" service="my_auth_service"/>
+            </authentication>
+            <cache cache-pool="my_cache_pool" stream-factory="my_other_stream_factory">
+                <config default-ttl="42" cache-lifetime="2592000" hash-algo="sha1" cache-key-generator="null">
+                    <respect-response-cache-directive>X-Foo</respect-response-cache-directive>
+                    <method>GET</method>
+                </config>
+            </cache>
+            <cookie cookie-jar="my_cookie_jar"/>
+            <decoder enabled="false"/>
+            <history journal="my_journal"/>
+            <logger enabled="false"/>
+            <redirect enabled="false"/>
+            <retry enabled="false"/>
+            <stopwatch enabled="false"/>
+        </plugins>
+    </config>
+
+</container>

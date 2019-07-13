@@ -1,0 +1,31 @@
+framework:
+  secret: php-http
+  test: ~
+
+httplug:
+    discovery:
+        async_client: auto
+    clients:
+        acme:
+            factory: httplug.factory.guzzle6
+            plugins:
+                -
+                    decoder:
+                        use_content_encoding: false
+                - app.http.plugin.custom
+                -
+                    add_host:
+                        host: "http://localhost:8000"
+                -
+                    authentication:
+                        my_basic:
+                            type: basic
+                            username: foo
+                            password: bar
+
+services:
+    app.http.plugin.custom:
+        class: Http\Client\Common\Plugin\RedirectPlugin
+
+twig:
+    strict_variables: '%kernel.debug%'

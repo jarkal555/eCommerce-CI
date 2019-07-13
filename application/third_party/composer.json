@@ -1,0 +1,9 @@
+{
+    "require": {
+        "mailgun/mailgun-php": "^2.8",
+        "kriswallsmith/buzz": "^0.16.1",
+        "nyholm/psr7": "^0.2.3",
+        "php-http/curl-client": "^1.7",
+        "php-http/httplug-bundle": "^1.15"
+    }
+}

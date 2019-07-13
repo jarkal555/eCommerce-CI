@@ -1,0 +1,103 @@
+{% extends '@WebProfiler/Profiler/layout.html.twig' %}
+
+{% block toolbar %}
+    {% if collector.stacks|length > 0 %}
+        {% set icon %}
+            {{ include('@Httplug/Icon/httplug.svg') }}
+            <span class="sf-toolbar-value">{{ collector.stacks|length }}</span>
+            <span class="sf-toolbar-label">in</span>
+            <span class="sf-toolbar-value">{{ collector.totalDuration|number_format }}</span>
+            <span class="sf-toolbar-label">ms</span>
+        {% endset %}
+
+        {% set text %}
+            <div class="sf-toolbar-info-piece">
+                <b>{{ collector.stacks|length }} requests</b>
+            </div>
+            <div class="sf-toolbar-info-piece">
+                <table class="sf-toolbar-ajax-requests">
+                    <thead>
+                    <tr>
+                        <th>Client</th>
+                        <th>Method</th>
+                        <th>Target</th>
+                        <th>Time</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody class="sf-toolbar-ajax-request-list">
+                        {% for stack in collector.stacks %}
+                            <tr>
+                                <td>{{ stack.client }}</td>
+                                <td>{{ stack.requestMethod }}</td>
+                                {% set target = stack.requestTarget %}
+                                <td title="{{ target }}">{{ target|length > 30 ? target[:30] ~ '...' : target }}</td>
+                                <td>{{ stack.duration == 0 ? 'n/a' : stack.duration|number_format ~ ' ms'}}</td>
+                                <td>{{ stack.failed ? 'FAILED' : stack.responseCode|default('n/a') }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endset %}
+
+        {% include '@WebProfiler/Profiler/toolbar_item.html.twig' with { 'link': profiler_url, 'status': collector.failedStacks|length ? 'red' : '' } %}
+    {% endif %}
+{% endblock %}
+
+{% block head %}
+    <style>
+        {{ include('@Httplug/style/httplug.css.twig') }}
+    </style>
+    <script type="text/javascript">
+        {{ include('@Httplug/script/httplug.js.twig') }}
+    </script>
+    {{ parent() }}
+{% endblock %}
+
+{% block menu %}
+    {# This left-hand menu appears when using the full-screen profiler. #}
+    <span class="label {{ collector.stacks|length == 0 ? 'disabled' }} {{ collector.failedStacks|length ? 'label-status-error' }}">
+        <span class="icon">
+            {{ include('@Httplug/Icon/httplug.svg') }}
+        </span>
+        <strong>Httplug</strong>
+        {% if collector.failedStacks|length %}
+            <span class="count">
+                <span>{{ collector.failedStacks|length }}</span>
+            </span>
+        {% endif %}
+    </span>
+{% endblock %}
+
+{% block panel %}
+    <h2>HTTPlug</h2>
+    <div class="sf-tabs">
+        {% for client in collector.clients %}
+        <div class="tab">
+            <h3 class="tab-title">{{ client }} <span class="badge">{{ collector.countClientMessages(client) }}</span></h3>
+
+            <div class="tab-content">
+                <p class="help">
+                    These messages are sent by client named "{{ client }}".
+                </p>
+
+                {% for stack in collector.clientRootStacks(client) %}
+                    <div class="httplug-stack">
+                        {% include '@Httplug/stack.html.twig' with {
+                            'collector': collector,
+                            'client': client,
+                            'stack': stack,
+                            'id': loop.index
+                        } only %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% else %}
+            <div class="empty">
+                <p>No request were sent.</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
