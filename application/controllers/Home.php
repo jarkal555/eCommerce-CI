@@ -6,6 +6,7 @@ class Home extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('course_model');
     }
     public function index()
     {
@@ -84,6 +85,9 @@ class Home extends CI_Controller
         // Title & Menu
         $data['title'] = 'Codewife : Educational Portal';
         $data['menu'] = 'home';
+
+        // Get Popular Courses
+        $data['popular_courses'] = $this->course_model->get_popular_courses(4);
 
         $this->load->view('includes/header', $data);
         $this->load->view('front/home_view', $data);
