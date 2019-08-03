@@ -41,7 +41,7 @@
 	<div class="page-wraper">
 		<div id="loading-icon-bx"></div>
 		<!-- Header Top ==== -->
-		<header class="header rs-nav header-transparent">
+		<header class="header rs-nav">
 			<div class="top-bar">
 				<div class="container">
 					<div class="row d-flex justify-content-between">
@@ -76,7 +76,7 @@
 					<div class="container clearfix">
 						<!-- Header Logo ==== -->
 						<div class="menu-logo">
-							<a href="index.html"><img src="<?php echo base_url(); ?>assets/frontweb/images/logo-white.png" alt=""></a>
+							<a href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>assets/frontweb/images/logo.png" alt=""></a>
 						</div>
 						<!-- Mobile Nav Button ==== -->
 						<button class="navbar-toggler collapsed menuicon justify-content-end" type="button" data-toggle="collapse" data-target="#menuDropdown" aria-controls="menuDropdown" aria-expanded="false" aria-label="Toggle navigation">

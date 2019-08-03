@@ -1,11 +1,11 @@
 <!-- Navigation Menu ==== -->
 <div class="menu-links navbar-collapse collapse justify-content-start" id="menuDropdown">
     <div class="menu-logo">
-        <a href="index.html"><img src="<?php echo base_url(); ?>assets/frontweb/images/logo.png" alt=""></a>
+        <a href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>assets/frontweb/images/logo.png" alt=""></a>
     </div>
     <ul class="nav navbar-nav">
-        <li class="<?php echo $menu == 'home' ? 'active' : ''; ?>"><a href="javascript:;">Home</a></li>
-        <li class="<?php echo $menu == 'courses' ? 'active' : ''; ?>"><a href="javascript:;">Courses</a></li>
+        <li class="<?php echo $menu == 'home' ? 'active' : ''; ?>"><a href="<?php echo base_url(); ?>">Home</a></li>
+        <li class="<?php echo $menu == 'courses' ? 'active' : ''; ?>"><a href="<?php echo base_url(); ?>courses">Courses</a></li>
 
         <li><a href="javascript:;">Pages <i class="fa fa-chevron-down"></i></a>
             <ul class="sub-menu">
